@@ -1,4 +1,3 @@
-```md
 # Cerveur
 
 Microframework HTTP escrito em C.
