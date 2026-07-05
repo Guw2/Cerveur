@@ -1,6 +1,10 @@
-#include <stdio.h>
+#include "logger.h"
 
 int main(void){
-	printf("Cerveur starting...\n");
+
+	logger_info("Cerveur starting...");
+	logger_warn("Warning msg test.");
+	logger_error("error msg test.");
+
 	return 0;
 }
