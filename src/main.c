@@ -1,6 +1,7 @@
 #include "logger.h"
 #include "config.h"
 #include "server.h"
+#include "http_method.h"
 
 #include "stdio.h"
 
@@ -15,7 +16,7 @@ int main(void){
 
 	logger_info("Cerveur starting...");
 	logger_info("Port: %d", config.port);
-    
+	
 	Server server;
 
 	server_init(&server, &config);
