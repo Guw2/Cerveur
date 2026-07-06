@@ -4,7 +4,7 @@ Microframework HTTP escrito em C.
 
 ## Estado atual
 
-Até o momento, um servidor HTTP mínimo.
+Até o momento, um servidor HTTP mínimo single-threaded projetado para ser Linux-first.
 
 ## Como rodar
 

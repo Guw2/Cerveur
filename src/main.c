@@ -2,6 +2,7 @@
 #include "config.h"
 #include "server.h"
 #include "http_method.h"
+#include "http_request.h"
 
 #include "stdio.h"
 

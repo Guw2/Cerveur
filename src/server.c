@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include "http_request.h"
 
 #define BACKLOG 128
 #define READ_BUFFER_SIZE 4096
@@ -122,6 +123,24 @@ int server_start(Server *server) {
 
         logger_info("Received request:");
         fprintf(stderr, "%s\n", buffer);
+
+        HttpRequest req;
+        http_request_init(&req);
+
+        if (http_request_parse(&req, buffer, (size_t)received, server->config) == 0) {
+            logger_info("Parsed method: %s", http_method_to_string(req.method));
+            logger_info("Parsed path: %s", req.path);
+
+            if (req.query_string != NULL) {
+                logger_info("Parsed query: %s", req.query_string);
+            }
+
+            logger_info("Parsed version: %s", req.version);
+        } else {
+            logger_warn("Failed to parse HTTP request line");
+        }
+
+        http_request_free(&req);
 
         send_fixed_response(client_fd);
 
