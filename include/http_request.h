@@ -7,11 +7,20 @@
 #include <stddef.h>
 
 typedef struct {
+    char *name;
+    char *value;
+} HttpHeader;
+
+typedef struct {
     HttpMethod method;
     char *method_raw;
     char *path;
     char *query_string;
     char *version;
+
+    HttpHeader *headers;
+    size_t header_count;
+    size_t header_capacity;
 
     char *body;
     size_t body_length;
@@ -19,7 +28,14 @@ typedef struct {
 
 void http_request_init(HttpRequest *req);
 
-int http_request_parse(HttpRequest *req, const char *raw, size_t raw_len, const ServerConfig *config);
+int http_request_parse(
+    HttpRequest *req,
+    const char *raw,
+    size_t raw_len,
+    const ServerConfig *config
+);
+
+const char *request_header(const HttpRequest *req, const char *name);
 
 void http_request_free(HttpRequest *req);
 

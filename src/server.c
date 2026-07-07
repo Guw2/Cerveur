@@ -136,8 +136,20 @@ int server_start(Server *server) {
             }
 
             logger_info("Parsed version: %s", req.version);
+            logger_info("Parsed headers: %zu", req.header_count);
+
+            const char *host = request_header(&req, "Host");
+            const char *agent = request_header(&req, "User-Agent");
+
+            if (host != NULL) {
+                logger_info("Header Host: %s", host);
+            }
+
+            if (agent != NULL) {
+                logger_info("Header User-Agent: %s", agent);
+            }
         } else {
-            logger_warn("Failed to parse HTTP request line");
+            logger_warn("Failed to parse HTTP request");
         }
 
         http_request_free(&req);
